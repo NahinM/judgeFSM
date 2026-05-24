@@ -18,7 +18,7 @@ export default function FunctionBuilder() {
     return (
         <>
             <h1 className="text-4xl font-bold text-center mt-10">Function Builder</h1>
-            <div className="mt-10 border-2 border-gray-300 rounded-lg mx-4">
+            <div className="mt-10 border-2 border-gray-300 rounded-lg">
                 <div className="flex justify-start">
                     <button className="px-3 text-lg py-1 bg-green-800 text-white rounded-l-md hover:bg-green-600 border-r-2 border-gray-900" onClick={() => setInputTab(true)}>
                         Input
