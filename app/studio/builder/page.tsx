@@ -1,5 +1,5 @@
 "use client";
-import FunctionBuilder from "./components/function-builder";
+import FunctionBuilder from "./components/function-builder/function-builder";
 
 export default function BuilderPage() {
     return (

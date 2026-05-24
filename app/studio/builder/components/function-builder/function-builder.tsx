@@ -1,12 +1,9 @@
 "use client";
-import { useState } from "react";
 import CodeEditor from '@uiw/react-textarea-code-editor';
+import { useFunctionBuilderStore } from "./state";
 
 export default function FunctionBuilder() {
-    const [code, setCode] = useState("");
-    const [input, setInput] = useState("");
-    const [output, setOutput] = useState("result will be shown here...");
-    const [inputTab, setInputTab] = useState(true);
+    const { code, setCode, input, setInput, output, setOutput, inputTab, setInputTab } = useFunctionBuilderStore();
 
     const runFunction = () => {
         try {
