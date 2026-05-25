@@ -17,32 +17,39 @@ export default function FunctionBuilder() {
 
     return (
         <>
-            <h1 className="text-4xl font-bold text-center mt-10">Function Builder</h1>
-            <div className="mt-10 border-2 border-gray-300 rounded-lg">
-                <div className="flex justify-start">
-                    <button className="px-3 text-lg py-1 bg-green-800 text-white rounded-l-md hover:bg-green-600 border-r-2 border-gray-900" onClick={() => setInputTab(true)}>
-                        Input
-                    </button>
-                    <button
-                        className="px-3 text-lg py-1 bg-green-800 text-white rounded-r-md hover:bg-green-600"
-                        onClick={() => { setInputTab(false); runFunction(); }}>
-                        Run
-                    </button>
+            <h1 className="text-xl font-bold text-center">Function Builder</h1>
+            <div className="rounded-sm shadow-md shadow-black/20 dark:shadow-white/20">
+                <div className="flex justify-start space-x-0.5 mx-0.5">
+                    {
+                        [
+                            { name: "Input", action: () => setInputTab(true) },
+                            { name: "Run", action: () => { setInputTab(false); runFunction(); } },
+                            { name: "Add to Stack [+]", action: () => { } }
+                        ].map((tab, i) => (
+                            <button
+                                key={tab.name}
+                                className={`px-3 text-md font-bold py-1 bg-green-800 text-white ${(i === 0 || i === 2) ? (`rounded-${{ 0: "l", 2: "r" }[i]}-md`) : ""} hover:bg-green-600`}
+                                onClick={tab.action}
+                            >
+                                {tab.name}
+                            </button>
+                        ))
+                    }
                 </div>
                 {inputTab ? (
                     <input
                         type="text"
-                        className="w-full p-4 mb-4 border-t-2 border-gray-300 focus:outline-none text-yellow-600"
+                        className="w-full p-4 mt-4 focus:outline-none text-yellow-600"
                         placeholder="Enter A Test String..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                     />
                 ) : (
-                    <div className="w-full p-4 mb-4 border-t-2 border-gray-300 text-green-400">
+                    <div className="w-full p-4 text-green-400">
                         <p className="text-lg">{output}</p>
                     </div>
                 )}
-                <h1 className="text-xl pt-4 px-4 space-x-1 border-t-2 border-gray-300">
+                <h1 className="text-xl pt-4 px-4 space-x-1 border-t-1 border-green-300 dark:border-green-700">
                     <span className="text-purple-800">function</span>
                     <span className="text-purple-800">(</span>
                     <span className="text-teal-400">s</span>
