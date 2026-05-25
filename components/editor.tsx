@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -20,8 +21,9 @@ export default function TextEditor({ text, setText, className }: { text?: string
             setText(newText);
         }
     };
+
     useEffect(() => {
-        if (text) {
+        if (text !== undefined) {
             setInternalText(text || "");
             if (inputarea.current) {
                 inputarea.current.innerText = text;

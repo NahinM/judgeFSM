@@ -15,6 +15,9 @@ export default function FunctionBuilder() {
         }
     };
 
+    const addToStack = () => {
+        console.log("Adding to stack:", code);
+    }
     return (
         <>
             <h1 className="text-xl font-bold text-center">Function Builder</h1>
@@ -24,7 +27,7 @@ export default function FunctionBuilder() {
                         [
                             { name: "Input", action: () => setInputTab(true) },
                             { name: "Run", action: () => { setInputTab(false); runFunction(); } },
-                            { name: "Add to Stack [+]", action: () => { } }
+                            { name: "Add to Stack [+]", action: addToStack }
                         ].map((tab, i) => (
                             <button
                                 key={tab.name}
