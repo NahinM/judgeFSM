@@ -41,7 +41,7 @@ import { useEffect, useState } from "react"
 
 export default function ModeToggle() {
     const { setTheme } = useTheme()
-    const [isDarkMode, setIsDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const [isDarkMode, setIsDarkMode] = useState(true);
 
     useEffect(() => {
         setTheme(isDarkMode ? "dark" : "light");
