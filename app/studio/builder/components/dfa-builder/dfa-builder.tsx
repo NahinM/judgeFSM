@@ -3,12 +3,15 @@ import { useDfaBuilderStore } from "./state";
 import TextEditor from "@/components/editor";
 import { DFAState } from "./dfa-state";
 import { FilePlusCorner } from "lucide-react";
+import { useStackStore } from "../stack/state";
 
 export default function DFAbuilder() {
     const { dfaInput, dfaSymbols, dfaNodes, setDfaSymbols, setDfaInput, setDfaNodes } = useDfaBuilderStore();
+    const { addDfa } = useStackStore();
     const addToStack = () => {
         const dfaState = new DFAState("DFA1", dfaSymbols, parseInt(dfaNodes));
         dfaState.fromString(dfaInput);
+        addDfa(dfaState);
         console.log("DFA State Created:", dfaState);
     }
     return (
