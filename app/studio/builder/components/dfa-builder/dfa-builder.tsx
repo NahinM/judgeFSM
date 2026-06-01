@@ -6,10 +6,10 @@ import { FilePlusCorner } from "lucide-react";
 import { useStackStore } from "../stack/state";
 
 export default function DFAbuilder() {
-    const { dfaInput, dfaSymbols, dfaNodes, setDfaSymbols, setDfaInput, setDfaNodes } = useDfaBuilderStore();
+    const { dfaInput, dfaSymbols, dfaNodes, dfaName, setDfaSymbols, setDfaInput, setDfaNodes, setDfaName } = useDfaBuilderStore();
     const { addDfa } = useStackStore();
     const addToStack = () => {
-        const dfaState = new DFAState("DFA1", dfaSymbols, parseInt(dfaNodes));
+        const dfaState = new DFAState(dfaName, dfaSymbols, parseInt(dfaNodes));
         dfaState.fromString(dfaInput);
         addDfa(dfaState);
         console.log("DFA State Created:", dfaState);
@@ -24,6 +24,18 @@ export default function DFAbuilder() {
             </button>
             <table className="table-auto border-l-5 border-green-600 border-separate border-spacing-2 ml-1 px-4">
                 <tbody>
+                    <tr>
+                        <td>DFA Name:</td>
+                        <td>
+                            <input
+                                type="text"
+                                placeholder="Enter DFA name"
+                                value={dfaName}
+                                onChange={(e) => setDfaName(e.target.value)}
+                                className="border border-yellow-600 rounded-md py-1 px-3 focus:outline-none text-yellow-600 bg-transparent col-span-2"
+                            />
+                        </td>
+                    </tr>
                     <tr>
                         <td>Symbols:</td>
                         <td>
