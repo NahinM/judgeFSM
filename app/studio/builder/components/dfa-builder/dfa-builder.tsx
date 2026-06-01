@@ -19,31 +19,33 @@ export default function DFAbuilder() {
             <button className="flex items-center bg-green-900 hover:bg-green-800 text-white py-1 px-3 rounded-sm" onClick={addToStack}>
                 <FilePlusCorner className="mr-1" size={16} /> Add To Stack
             </button>
-            <table className="m-4">
-                <tr>
-                    <td className="px-4 py-2">Symbols:</td>
-                    <td>
-                        <input
-                            type="text"
-                            placeholder="Enter symbols (comma separated)"
-                            value={dfaSymbols}
-                            onChange={(e) => setDfaSymbols(e.target.value)}
-                            className="border border-yellow-600 rounded-md py-1 px-3 focus:outline-none text-yellow-600 bg-transparent col-span-2"
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td className="px-4 py-2">Number Of Nodes:</td>
-                    <td>
-                        <input
-                            type="text"
-                            placeholder="Enter number of nodes"
-                            value={dfaNodes}
-                            onChange={(e) => setDfaNodes(e.target.value)}
-                            className="border border-green-600 rounded-md py-1 px-3 focus:outline-none text-green-600 bg-transparent col-span-2"
-                        />
-                    </td>
-                </tr>
+            <table className="table-auto border-l-5 border-green-600 border-separate border-spacing-2 ml-1 px-4">
+                <tbody>
+                    <tr>
+                        <td>Symbols:</td>
+                        <td>
+                            <input
+                                type="text"
+                                placeholder="Enter symbols (comma separated)"
+                                value={dfaSymbols}
+                                onChange={(e) => setDfaSymbols(e.target.value)}
+                                className="border border-yellow-600 rounded-md py-1 px-3 focus:outline-none text-yellow-600 bg-transparent col-span-2"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Number Of Nodes:</td>
+                        <td>
+                            <input
+                                type="text"
+                                placeholder="Enter number of nodes"
+                                value={dfaNodes}
+                                onChange={(e) => setDfaNodes(e.target.value)}
+                                className="border border-green-600 rounded-md py-1 px-3 focus:outline-none text-green-600 bg-transparent col-span-2"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <div className="grid grid-cols-3 gap-4 w-100">
                 <span></span>
