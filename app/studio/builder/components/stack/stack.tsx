@@ -20,7 +20,7 @@ export default function Stack() {
                 <tbody>
                     <tr>
                         <td>
-                            <div className="p-2 border border-green-800 rounded-md h-80">
+                            <div className="p-2 border border-green-800 rounded-md h-80 overflow-y-auto">
                                 {dfas.map((dfa, index) => (
                                     <div key={index} className="flex items-center mb-1 px-5 py-1 bg-teal-800/30 rounded-md hover:border-b-2 border-green-600 cursor-pointer">
                                         {dfa.name}
