@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import DFAbuilder from "./components/dfa-builder/dfa-builder";
 import FunctionBuilder from "./components/function-builder/function-builder";
 import TestCaseBuilder from "./components/testcase-builder/testcase-builder";
+import Testing from "./components/testing/testing";
 
 export default function BuilderPage() {
     return (
@@ -21,7 +22,7 @@ export default function BuilderPage() {
                 <div className="p-2">
                     <TabsContent value="dfa"><DFAbuilder /></TabsContent>
                     <TabsContent value="function"><FunctionBuilder /></TabsContent>
-                    <TabsContent value="testing">Testing Content (coming soon)</TabsContent>
+                    <TabsContent value="testing"><Testing /></TabsContent>
                     <TabsContent value="testcase"><TestCaseBuilder /></TabsContent>
                 </div>
             </Tabs>
