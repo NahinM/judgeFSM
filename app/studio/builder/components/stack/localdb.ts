@@ -12,3 +12,15 @@ export const loadStackDfas = (): DFAState[] => {
     }
     return [];
 }
+
+export const addStackFunctions = (functions: { name: string; code: string }[]) => {
+    window.localStorage.setItem("stackFunctions", JSON.stringify(functions));
+}
+
+export const loadStackFunctions = (): { name: string; code: string }[] => {
+    const functionsString = window.localStorage.getItem("stackFunctions");
+    if (functionsString) {
+        return JSON.parse(functionsString);
+    }
+    return [];
+}

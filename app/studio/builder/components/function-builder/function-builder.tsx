@@ -1,9 +1,18 @@
 "use client";
+import {
+    ButtonGroup
+} from "@/components/ui/button-group"
+import { Button } from "@/components/ui/button"
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import { useFunctionBuilderStore } from "./state";
+import { Play, FilePlusCorner, Pencil } from "lucide-react";
+import { useState } from "react";
+import { useStackStore } from "../stack/state";
 
 export default function FunctionBuilder() {
-    const { code, setCode, input, setInput, output, setOutput, inputTab, setInputTab } = useFunctionBuilderStore();
+    const { code, setCode, input, setInput, output, setOutput, inputTab, setInputTab, name, setName } = useFunctionBuilderStore();
+    const [errMessage, setErrMessage] = useState("");
+    const { addFunction } = useStackStore();
 
     const runFunction = () => {
         try {
@@ -11,38 +20,48 @@ export default function FunctionBuilder() {
             const result = func(input);
             setOutput(result.toString());
         } catch (error) {
-            setOutput(error instanceof Error ? error.message : "An unknown error occurred.");
+            setErrMessage(error instanceof Error ? error.message : "An unknown error occurred.");
+            setOutput("");
         }
     };
 
     const addToStack = () => {
-        console.log("Adding to stack:", code);
+        if (!name || !code) {
+            setErrMessage("Please provide both a name and code for the function before adding to the stack.");
+            return;
+        }
+        setErrMessage("");
+        addFunction(name, code);
     }
     return (
         <>
             <h1 className="text-xl font-bold text-center">Function Builder</h1>
             <div className="rounded-sm shadow-md shadow-black/20 dark:shadow-white/20">
-                <div className="flex justify-start space-x-0.5 mx-0.5">
+                <ButtonGroup>
                     {
                         [
-                            { name: "Input", action: () => setInputTab(true) },
-                            { name: "Run", action: () => { setInputTab(false); runFunction(); } },
-                            { name: "Add to Stack [+]", action: addToStack }
+                            { name: "Input", action: () => setInputTab(true), icon: Pencil },
+                            { name: "Run", action: () => { setInputTab(false); runFunction(); }, icon: Play },
+                            { name: "Add to Stack", action: addToStack, icon: FilePlusCorner }
                         ].map((tab, i) => (
-                            <button
+                            <Button
                                 key={tab.name}
-                                className={`px-3 text-md font-bold py-1 bg-green-800 text-white ${(i === 0 || i === 2) ? (`rounded-${{ 0: "l", 2: "r" }[i]}-md`) : ""} hover:bg-green-600`}
+                                className="bg-green-900 hover:bg-green-800 text-white py-1 px-3 rounded-sm"
                                 onClick={tab.action}
                             >
-                                {tab.name}
-                            </button>
+                                {tab.name} {tab.icon && <tab.icon size={16} />}
+                            </Button>
                         ))
                     }
+                </ButtonGroup>
+                <div className="w-full p-4 text-green-400">
+                    {errMessage && <p className="text-red-500">{errMessage}</p>}
+                    <p className="text-lg">Test your function with different input values.</p>
                 </div>
                 {inputTab ? (
                     <input
                         type="text"
-                        className="w-full p-4 mt-4 focus:outline-none text-yellow-600"
+                        className="w-full p-4 focus:outline-none text-yellow-600"
                         placeholder="Enter A Test String..."
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
@@ -53,12 +72,19 @@ export default function FunctionBuilder() {
                     </div>
                 )}
                 <h1 className="text-xl pt-4 px-4 space-x-1 border-t-1 border-green-300 dark:border-green-700">
-                    <span className="text-purple-800">function</span>
-                    <span className="text-purple-800">(</span>
+                    <span className="text-purple-500">function</span>
+                    <input
+                        type="text"
+                        className={`w-32 py-1 px-3 focus:outline-none dark:text-white text-sm bg-transparent rounded-full border-2 ${!name ? "border-red-500 dark:border-red-700" : "border-green-800 dark:border-green-500"}`}
+                        placeholder="Enter Name..."
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <span className="text-purple-500">(</span>
                     <span className="text-teal-400">s</span>
                     <span className="text-gray-400">:</span>
                     <span className="text-yellow-600">string</span>
-                    <span className="text-purple-800">)</span>
+                    <span className="text-purple-500">)</span>
                     <span className="text-gray-400">:</span>
                     <span className="text-blue-400">boolean</span>
                 </h1>

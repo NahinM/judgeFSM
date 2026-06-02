@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 
 interface FunctionBuilderState {
+    name: string;
     code: string;
     input: string;
     output: string;
@@ -10,9 +11,11 @@ interface FunctionBuilderState {
     setInput: (input: string) => void;
     setOutput: (output: string) => void;
     setInputTab: (inputTab: boolean) => void;
+    setName: (name: string) => void;
 }
 
 export const useFunctionBuilderStore = create<FunctionBuilderState>((set) => ({
+    name: "",
     code: "",
     input: "",
     output: "",
@@ -21,4 +24,5 @@ export const useFunctionBuilderStore = create<FunctionBuilderState>((set) => ({
     setInput: (input) => set({ input }),
     setOutput: (output) => set({ output }),
     setInputTab: (inputTab) => set({ inputTab }),
+    setName: (name) => set({ name }),
 }));
