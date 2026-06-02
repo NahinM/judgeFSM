@@ -4,11 +4,19 @@ import TextEditor from "@/components/editor";
 import { DFAState } from "./dfa-state";
 import { FilePlusCorner } from "lucide-react";
 import { useStackStore } from "../stack/state";
+import { useState } from "react";
 
 export default function DFAbuilder() {
     const { dfaInput, dfaSymbols, dfaNodes, dfaName, setDfaSymbols, setDfaInput, setDfaNodes, setDfaName } = useDfaBuilderStore();
     const { addDfa } = useStackStore();
+    const [alertMessage, setAlertMessage] = useState("");
+
     const addToStack = () => {
+        if (!dfaName || !dfaSymbols || !dfaNodes || !dfaInput) {
+            setAlertMessage("Please fill in all fields before adding to stack.");
+            return;
+        }
+        setAlertMessage("");
         const dfaState = new DFAState(dfaName, dfaSymbols, parseInt(dfaNodes));
         dfaState.fromString(dfaInput);
         addDfa(dfaState);
@@ -22,7 +30,13 @@ export default function DFAbuilder() {
             <button className="flex items-center bg-green-900 hover:bg-green-800 text-white py-1 px-3 rounded-sm" onClick={addToStack}>
                 <FilePlusCorner className="mr-1" size={16} /> Add To Stack
             </button>
-            <table className="table-auto border-l-5 border-green-600 border-separate border-spacing-2 ml-1 px-4">
+            {alertMessage && (
+                <div className="text-red-500 text-sm mt-2">
+                    {alertMessage}
+                </div>
+            )}
+            <div className="h-4"></div>
+            <table className="table-auto border-l-5 border-green-600 border-separate border-spacing-2 mx-1 my-4 px-4">
                 <tbody>
                     <tr>
                         <td>DFA Name:</td>
