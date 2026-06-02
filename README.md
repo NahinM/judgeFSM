@@ -12,6 +12,6 @@ This project includes a problem set for learning, as well as a comprehensive bui
 
 ## Preview
 
-<p align="center">
-<img src="/app/docs/images/studio/dfa.png" alt="DFA builder" width="400">
-</p>
+![DFA builder](/app/docs/images/studio/dfa.png)
+![Function builder](/app/docs/images/studio/function.png)
+![Testing](/app/docs/images/studio/testing.png)
