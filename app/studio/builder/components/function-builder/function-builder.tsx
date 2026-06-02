@@ -8,6 +8,7 @@ import { useFunctionBuilderStore } from "./state";
 import { Play, FilePlusCorner, Pencil } from "lucide-react";
 import { useState } from "react";
 import { useStackStore } from "../stack/state";
+import "./style.css";
 
 export default function FunctionBuilder() {
     const { code, setCode, input, setInput, output, setOutput, inputTab, setInputTab, name, setName } = useFunctionBuilderStore();
@@ -19,6 +20,7 @@ export default function FunctionBuilder() {
             const func = new Function("s", code);
             const result = func(input);
             setOutput(result.toString());
+            setErrMessage("");
         } catch (error) {
             setErrMessage(error instanceof Error ? error.message : "An unknown error occurred.");
             setOutput("");
@@ -46,7 +48,7 @@ export default function FunctionBuilder() {
                         ].map((tab, i) => (
                             <Button
                                 key={tab.name}
-                                className="bg-green-900 hover:bg-green-800 text-white py-1 px-3 rounded-sm"
+                                className={`bg-green-900 hover:bg-green-800 ${(inputTab && i === 0) || (!inputTab && i === 1) ? "text-sky-500" : "text-white"} py-1 px-3 rounded-sm`}
                                 onClick={tab.action}
                             >
                                 {tab.name} {tab.icon && <tab.icon size={16} />}
@@ -75,7 +77,8 @@ export default function FunctionBuilder() {
                     <span className="text-purple-500">function</span>
                     <input
                         type="text"
-                        className={`w-32 py-1 px-3 focus:outline-none dark:text-white text-sm bg-transparent rounded-full border-2 ${!name ? "border-red-500 dark:border-red-700" : "border-green-800 dark:border-green-500"}`}
+                        className={`w-32 py-1 px-3 focus:outline-none dark:text-white text-sm bg-transparent rounded-full border-2 ${!name ? "" : "border-green-800 dark:border-green-500"}`}
+                        style={{ animation: !name ? "highlight 2s infinite" : "none" }}
                         placeholder="Enter Name..."
                         value={name}
                         onChange={(e) => setName(e.target.value)}
