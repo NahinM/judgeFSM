@@ -31,7 +31,7 @@ export default function Stack() {
                                 {dfas.map((dfa, index) => (
                                     <div key={index} className="flex items-center mb-1 px-5 py-1 bg-teal-800/30 rounded-md hover:border-b-2 border-black dark:border-white cursor-pointer">
                                         {dfa.name}
-                                        <ListPlus className="ml-auto text-green-500" size={16} onClick={() => console.log("Add function to DFA:", dfa)} />
+                                        <ListPlus className="ml-auto text-green-500" size={16} onClick={() => console.log("Add dfa to stack:", dfa)} />
                                         <Trash2 className="ml-2 text-red-500" size={16} onClick={() => removeDfa(index)} />
                                     </div>
                                 ))}
@@ -42,7 +42,8 @@ export default function Stack() {
                                 {functions.map((fn, index) => (
                                     <div key={index} className="flex items-center mb-1 px-5 py-1 bg-blue-800/30 rounded-md hover:border-b-2 border-black dark:border-white cursor-pointer">
                                         {fn.name}
-                                        <Trash2 className="ml-auto text-red-500" size={16} onClick={() => removeFunction(index)} />
+                                        <ListPlus className="ml-auto text-green-500" size={16} onClick={() => console.log("Add function to stack:", fn)} />
+                                        <Trash2 className="ml-2 text-red-500" size={16} onClick={() => removeFunction(index)} />
                                     </div>
                                 ))}
                             </div>
