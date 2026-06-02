@@ -3,11 +3,11 @@ export class DFAState {
     symbols: string;
     nodes: number;
     table: number[][];
-    constructor(name: string, symbols: string, nodes: number) {
+    constructor(name: string, symbols: string, nodes: number, table?: number[][]) {
         this.name = name;
         this.symbols = symbols;
         this.nodes = nodes;
-        this.table = Array.from({ length: nodes }, () => Array(symbols.length).fill(0));
+        this.table = table || Array.from({ length: nodes }, () => Array(symbols.length).fill(0));
     }
 
     addTransition(from: number, symbol: string, to: number) {
@@ -32,4 +32,6 @@ export class DFAState {
             }
         }
     }
+
+
 }

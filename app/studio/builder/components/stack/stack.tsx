@@ -1,14 +1,21 @@
 import { useStackStore } from "./state";
-import { Trash2, ListPlus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Trash2, ListPlus, RefreshCcw } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Stack() {
-    const { dfas, removeDfa } = useStackStore();
-
+    const { dfas, removeDfa, loadRecording } = useStackStore();
+    useEffect(() => {
+        loadRecording();
+        console.log("DFA in stack");
+    }, [])
     return (
         <div className="p-4">
-            <h1 className="text-xl font-bold text-center border-t border-green-700 p-4">
-                Stack
-            </h1>
+            <div className="flex justify-center border-t border-black dark:border-white p-2">
+                <Button className="bg-green-900 hover:bg-green-800 text-white" onClick={loadRecording}>
+                    Refresh Stack <RefreshCcw size={16} />
+                </Button>
+            </div>
             <table className="table-fixed w-full mt-4 text-center">
                 <thead>
                     <tr>
@@ -20,9 +27,9 @@ export default function Stack() {
                 <tbody>
                     <tr>
                         <td>
-                            <div className="p-2 border border-green-800 rounded-md h-80 overflow-y-auto">
+                            <div className="p-2 border border-black dark:border-white rounded-md h-80 overflow-y-auto">
                                 {dfas.map((dfa, index) => (
-                                    <div key={index} className="flex items-center mb-1 px-5 py-1 bg-teal-800/30 rounded-md hover:border-b-2 border-green-600 cursor-pointer">
+                                    <div key={index} className="flex items-center mb-1 px-5 py-1 bg-teal-800/30 rounded-md hover:border-b-2 border-black dark:border-white cursor-pointer">
                                         {dfa.name}
                                         <ListPlus className="ml-auto text-green-500" size={16} onClick={() => console.log("Add function to DFA:", dfa)} />
                                         <Trash2 className="ml-2 text-red-500" size={16} onClick={() => removeDfa(index)} />
@@ -31,11 +38,11 @@ export default function Stack() {
                             </div>
                         </td>
                         <td>
-                            <div className="p-2 border border-green-800 rounded-md h-80">
+                            <div className="p-2 border border-black dark:border-white rounded-md h-80">
                             </div>
                         </td>
                         <td>
-                            <div className="p-2 border border-green-800 rounded-md h-80">
+                            <div className="p-2 border border-black dark:border-white rounded-md h-80">
                             </div>
                         </td>
                     </tr>
